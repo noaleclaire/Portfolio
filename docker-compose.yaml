@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+
+  my-portfolio:
+    build:
+      context: ./my-portfolio
+      dockerfile: Dockerfile-reactjs
+    image: my-portfolio_reactjs:latest
+    container_name: ${CONTAINER_NAME_PREFIX}front
+    restart: unless-stopped
+    volumes:
+      - ./my-portfolio/src:/app/my-portfolio/src/:ro
+    ports:
+      - 3000:3000
+    networks:
+      - my-portfolio_network
+
+networks:
+  my-portfolio_network:
